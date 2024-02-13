@@ -1,19 +1,16 @@
 specVersion: 0.0.2
-description: Uniswap is a decentralized protocol for automated token exchange on Ethereum.
-repository: https://github.com/Uniswap/uniswap-v2-subgraph
+description: Swap is a decentralized protocol for automated token exchange on XAI.
+repository: https://github.com/hoale58-vl/v2-subgraph
 schema:
   file: ./schema.graphql
-graft:
-  base: Qmc7K8dKoadu1VcHfAV45pN4sPnwZcU2okV6cuU4B7qQp1
-  block: 17308000
 dataSources:
   - kind: ethereum/contract
     name: Factory
-    network: mainnet
+    network: xai-orbit
     source:
-      address: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
+      address: '0x6858a6c3484b7b033B748261e550FC20c479b063'
       abi: Factory
-      startBlock: 10000834
+      startBlock: 374537
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -37,7 +34,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Pair
-    network: mainnet
+    network: xai-orbit
     source:
       abi: Pair
     mapping:

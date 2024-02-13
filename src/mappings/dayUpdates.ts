@@ -1,17 +1,17 @@
 /* eslint-disable prefer-const */
 import { BigDecimal, BigInt, ethereum } from '@graphprotocol/graph-ts'
-import { Bundle, Pair, PairDayData, Token, TokenDayData, UniswapDayData, UniswapFactory } from '../types/schema'
+import { Bundle, Pair, PairDayData, Token, TokenDayData, KaleidoswapDayData, KaleidoswapFactory } from '../types/schema'
 import { PairHourData } from './../types/schema'
 import { FACTORY_ADDRESS, ONE_BI, ZERO_BD, ZERO_BI } from './helpers'
 
-export function updateUniswapDayData(event: ethereum.Event): UniswapDayData {
-  let uniswap = UniswapFactory.load(FACTORY_ADDRESS)
+export function updateKaleidoswapDayData(event: ethereum.Event): KaleidoswapDayData {
+  let uniswap = KaleidoswapFactory.load(FACTORY_ADDRESS)
   let timestamp = event.block.timestamp.toI32()
   let dayID = timestamp / 86400
   let dayStartTimestamp = dayID * 86400
-  let uniswapDayData = UniswapDayData.load(dayID.toString())
+  let uniswapDayData = KaleidoswapDayData.load(dayID.toString())
   if (uniswapDayData === null) {
-    uniswapDayData = new UniswapDayData(dayID.toString())
+    uniswapDayData = new KaleidoswapDayData(dayID.toString())
     uniswapDayData.date = dayStartTimestamp
     uniswapDayData.dailyVolumeUSD = ZERO_BD
     uniswapDayData.dailyVolumeETH = ZERO_BD
@@ -25,7 +25,7 @@ export function updateUniswapDayData(event: ethereum.Event): UniswapDayData {
   uniswapDayData.txCount = uniswap.txCount
   uniswapDayData.save()
 
-  return uniswapDayData as UniswapDayData
+  return uniswapDayData as KaleidoswapDayData
 }
 
 export function updatePairDayData(event: ethereum.Event): PairDayData {
