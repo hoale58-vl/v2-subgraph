@@ -3,12 +3,12 @@ import { Pair, Token, Bundle } from '../types/schema'
 import { BigDecimal, Address, BigInt } from '@graphprotocol/graph-ts/index'
 import { ZERO_BD, factoryContract, ADDRESS_ZERO, ONE_BD, UNTRACKED_PAIRS } from './helpers'
 
-const WETH_ADDRESS = '0x36BE1fd6Ff2a6bEB34B500a04f89103a524516D8'
-const USDC_WETH_PAIR = '0xcf592aae7a1c31dc02462eecad718ae695590cb1' // created 10008355
+const XAI_ADDRESS = '0x4cb9a7ae498cedcbb5eae9f25736ae7d428c9d66' // XAI
+const USDC_XAI_PAIR = '0x3df2a90a35a5aece79a05203e72f2a6dace9d0ff' // XAI-USDC
 
 export function getEthPriceInUSD(): BigDecimal {
   // fetch eth prices for each stablecoin
-  let usdcPair = Pair.load(USDC_WETH_PAIR) // usdc is token0
+  let usdcPair = Pair.load(USDC_XAI_PAIR) // usdc is token0
 
   // all 3 have been created
   if (usdcPair !== null) {
@@ -20,8 +20,9 @@ export function getEthPriceInUSD(): BigDecimal {
 
 // token where amounts should contribute to tracked volume and liquidity
 let WHITELIST: string[] = [
-  '0x36BE1fd6Ff2a6bEB34B500a04f89103a524516D8', // WXAI
-  '0x300a7b57dc85b6a9776e249614abf0fe5c9905fb' // USDC
+  '0x82af49447d8a07e3bd95bd0d56f35241523fbab1', // WETH
+  '0x4cb9a7ae498cedcbb5eae9f25736ae7d428c9d66', // XAI
+  '0xaf88d065e77c8cc2239327c5edb3a432268e5831' // USDC.e
 ]
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
@@ -35,7 +36,7 @@ let MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('2')
  * @todo update to be derived ETH (add stablecoin estimates)
  **/
 export function findEthPerToken(token: Token): BigDecimal {
-  if (token.id == WETH_ADDRESS) {
+  if (token.id == XAI_ADDRESS) {
     return ONE_BD
   }
   // loop through whitelist and check if paired with any

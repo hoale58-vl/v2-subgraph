@@ -1,16 +1,16 @@
 specVersion: 0.0.2
-description: Swap is a decentralized protocol for automated token exchange on XAI.
+description: Swap is a decentralized protocol for automated token exchange on ARB.
 repository: https://github.com/hoale58-vl/v2-subgraph
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: Factory
-    network: xai-orbit
+    network: arbitrum-one
     source:
-      address: '0x6858a6c3484b7b033B748261e550FC20c479b063'
+      address: '0x427a733Bd14a949eA771a558f6934bB0004c0c4E'
       abi: Factory
-      startBlock: 374537
+      startBlock: 181235376
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -34,7 +34,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Pair
-    network: xai-orbit
+    network: arbitrum-one
     source:
       abi: Pair
     mapping:
